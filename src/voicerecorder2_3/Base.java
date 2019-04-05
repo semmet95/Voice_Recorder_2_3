@@ -19,13 +19,7 @@ public class Base extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     try {
                         javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (InstantiationException ex) {
-                        Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IllegalAccessException ex) {
-                        Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (UnsupportedLookAndFeelException ex) {
+                    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
                         Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
@@ -181,34 +175,34 @@ public class Base extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void hitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitActionPerformed
-        if(c==0)
-        {
-            image.setVisible(true);
-            image.setEnabled(true);
-            rec.Capture(c);
-            tim.start();
-            hit.setText("Stop");
-            ++c;
-        }
-        else if(c==1)
-        {
-            image.setVisible(false);
-            image.setEnabled(false);
-            ++c;
-            tim.stop();
-            rec.abort();
-            hit.setText("Play");
-            save.setEnabled(true);
-            nu.setEnabled(true);
-        }
-        else if(c==2)
-        {
-            hit.setText("Stop");
-            tim=new Timer();
-            tim.start();
-            rec.PlayBack(c);
-            --c;
-            
+        switch (c) {
+            case 0:
+                image.setVisible(true);
+                image.setEnabled(true);
+                rec.Capture(c);
+                tim.start();
+                hit.setText("Stop");
+                ++c;
+                break;
+            case 1:
+                image.setVisible(false);
+                image.setEnabled(false);
+                ++c;
+                tim.stop();
+                rec.abort();
+                hit.setText("Play");
+                save.setEnabled(true);
+                nu.setEnabled(true);
+                break;
+            case 2:
+                hit.setText("Stop");
+                tim=new Timer();
+                tim.start();
+                rec.PlayBack(c);
+                --c;
+                break;
+            default:
+                break;
         }
     }//GEN-LAST:event_hitActionPerformed
 
